@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kaelan Khan — Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<!-- corner datum marks, fixed to viewport -->
+<div class="datum datum-tl" aria-hidden="true">+</div>
+<div class="datum datum-tr" aria-hidden="true">+</div>
+<div class="datum datum-bl" aria-hidden="true">+</div>
+<div class="datum datum-br" aria-hidden="true">+</div>
+
+<header class="nav">
+  <div class="nav-inner">
+    <a href="#top" class="nav-mark">Kaelan Khan</a>
+    <nav class="nav-links">
+      <a href="#about">About</a>
+      <a href="#experience">Experience</a>
+      <div class="nav-item">
+        <a href="#projects">Projects</a>
+        <div class="nav-dropdown">
+          <div class="nav-dropdown-card">
+            <a href="project-1.html">Formula SAE</a>
+            <a href="project-2.html">Sim Racing</a>
+            <a href="project-3.html">Capstone</a>
+            <a href="project-4.html">Directed Study</a>
+          </div>
+        </div>
+      </div>
+      <a href="#contact">Contact</a>
+    </nav>
+    <a class="resume-stamp resume-stamp--small" href="#" target="_blank" rel="noopener">
+      <span>Resume</span>
+    </a>
+  </div>
+</header>
+
+<main id="top">
+
+  <!-- ============ HERO / TITLE BLOCK ============ -->
+  <section class="hero">
+    <div class="hero-frame">
+      <!-- <div class="hero-meta">
+        <span>DRAWN BY: [YOUR NAME]</span>
+        <span>SHEET 01 OF 04</span>
+        <span>REV. 2026</span>
+      </div> -->
+
+      <h1 class="hero-title">
+        Kaelan Khan
+        <span class="hero-title-sub">Engineering Student</span>
+      </h1>
+
+      <p class="hero-copy">
+        I design, prototype, and ship things that hold up under real
+        constraints — deadlines, budgets, and physics. Currently studying
+        Aerospace Engineering at Carleton University.
+      </p>
+
+      <div class="hero-actions">
+        <a href="#projects" class="btn btn-primary">View Projects</a>
+        <a href="#" class="resume-stamp" target="_blank" rel="noopener">
+          <span class="resume-stamp-ring">
+            <span>DOWNLOAD</span>
+            <span>RESUME</span>
+          </span>
+        </a>
+      </div>
+    </div>
+
+    <!--<div class="hero-ruler" aria-hidden="true">
+      <span>0</span><span>10</span><span>20</span><span>30</span><span>40</span><span>50</span><span>60</span><span>70</span><span>80</span><span>90</span><span>100</span>
+    </div>-->
+  </section>
+
+  <!-- ============ ABOUT ============ -->
+  <section id="about" class="section">
+    <div class="section-head">
+      <h2>About</h2>
+    </div>
+
+    <div class="about-grid">
+      <div class="about-photo" aria-hidden="true">
+        <span class="corner corner-tl"></span>
+        <span class="corner corner-tr"></span>
+        <span class="corner corner-bl"></span>
+        <span class="corner corner-br"></span>
+        <span class="about-photo-label">FIG. 1 — PORTRAIT</span>
+      </div>
+
+      <div class="about-text">
+        <p>
+          <span class="drop">I</span>'m a fifth year Aerospace Engineering
+          student at Carleton, interested in vehicle dynamics, data analysis, . I like problems
+          that force a trade-off between elegant and working, and I usually
+          pick working first.
+        </p>
+        <p>
+          Outside coursework I [hobby / club / research group / competition
+          team]. I'm currently looking for [internship / co-op / full-time
+          role] opportunities starting [term/year].
+        </p>
+
+        <dl class="spec-list">
+          <div><dt>Location</dt><dd>[City, Country]</dd></div>
+          <div><dt>Focus</dt><dd>[Your specialization]</dd></div>
+          <div><dt>Tools</dt><dd>[e.g. SolidWorks, Python, MATLAB]</dd></div>
+          <div><dt>Status</dt><dd>[Open to opportunities]</dd></div>
+        </dl>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ EXPERIENCE ============ -->
+  <section id="experience" class="section">
+    <div class="section-head">
+      <h2>Experience</h2>
+    </div>
+
+    <ol class="timeline">
+      <li class="timeline-item">
+        <div class="timeline-date">2025 — PRESENT</div>
+        <div class="timeline-body">
+          <h3>[Job Title]</h3>
+          <p class="timeline-org">[Company Name] · [City]</p>
+          <p>[One or two lines on what you owned and the outcome — a
+            number is worth more than an adjective.]</p>
+        </div>
+      </li>
+
+      <li class="timeline-item">
+        <div class="timeline-date">2024 — 2025</div>
+        <div class="timeline-body">
+          <h3>[Job Title]</h3>
+          <p class="timeline-org">[Company Name] · [City]</p>
+          <p>[One or two lines on what you owned and the outcome.]</p>
+        </div>
+      </li>
+
+      <li class="timeline-item">
+        <div class="timeline-date">2023 — 2024</div>
+        <div class="timeline-body">
+          <h3>[Job Title / Research Position]</h3>
+          <p class="timeline-org">[Lab or Company Name] · [City]</p>
+          <p>[One or two lines on what you owned and the outcome.]</p>
+        </div>
+      </li>
+
+      <li class="timeline-item">
+        <div class="timeline-date">2022 — 2023</div>
+        <div class="timeline-body">
+          <h3>[Job Title]</h3>
+          <p class="timeline-org">[Company Name] · [City]</p>
+          <p>[One or two lines on what you owned and the outcome.]</p>
+        </div>
+      </li>
+    </ol>
+  </section>
+
+  <!-- ============ PROJECTS ============ -->
+  <section id="projects" class="section">
+    <div class="section-head">
+      <h2>Projects</h2>
+    </div>
+
+    <div class="project-grid">
+
+      <article class="project-card">
+        <div class="project-sheet">SHEET 01</div>
+        <h3>[Project Name]</h3>
+        <p>[One or two sentences: the problem, your approach, and the
+          result. Keep it concrete.]</p>
+        <div class="tag-row">
+          <span class="tag">[Tech]</span>
+          <span class="tag">[Tech]</span>
+          <span class="tag">[Tech]</span>
+        </div>
+        <a href="project-1.html" class="project-link">View project →</a>
+      </article>
+
+      <article class="project-card">
+        <div class="project-sheet">SHEET 02</div>
+        <h3>[Project Name]</h3>
+        <p>[One or two sentences: the problem, your approach, and the
+          result. Keep it concrete.]</p>
+        <div class="tag-row">
+          <span class="tag">[Tech]</span>
+          <span class="tag">[Tech]</span>
+        </div>
+        <a href="project-2.html" class="project-link">View project →</a>
+      </article>
+
+      <article class="project-card">
+        <div class="project-sheet">SHEET 03</div>
+        <h3>[Project Name]</h3>
+        <p>[One or two sentences: the problem, your approach, and the
+          result. Keep it concrete.]</p>
+        <div class="tag-row">
+          <span class="tag">[Tech]</span>
+          <span class="tag">[Tech]</span>
+          <span class="tag">[Tech]</span>
+        </div>
+        <a href="project-3.html" class="project-link">View project →</a>
+      </article>
+
+      <article class="project-card">
+        <div class="project-sheet">SHEET 04</div>
+        <h3>[Project Name]</h3>
+        <p>[One or two sentences: the problem, your approach, and the
+          result. Keep it concrete.]</p>
+        <div class="tag-row">
+          <span class="tag">[Tech]</span>
+          <span class="tag">[Tech]</span>
+        </div>
+        <a href="project-4.html" class="project-link">View project →</a>
+      </article>
+
+    </div>
+  </section>
+
+  <!-- ============ CONTACT / FOOTER ============ -->
+  <section id="contact" class="section section-contact">
+    <div class="section-head">
+      <h2>Contact</h2>
+    </div>
+
+    <div class="contact-block">
+      <p class="contact-lead">Have a role, a project, or a question?<br>Reach out — I read everything.</p>
+      <a class="contact-email" href="mailto:you@example.com">you@example.com</a>
+
+      <div class="contact-links">
+        <a href="#" target="_blank" rel="noopener">GitHub</a>
+        <a href="#" target="_blank" rel="noopener">LinkedIn</a>
+        <a href="#" target="_blank" rel="noopener">Resume</a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="footer">
+  <div class="footer-inner">
+    <span>[YOUR NAME] — ENG. PORTFOLIO</span>
+    <span>SHEET 04 OF 04</span>
+    <span>© 2026</span>
+  </div>
+</footer>
+
+</body>
+</html>
