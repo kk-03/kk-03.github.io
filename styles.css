@@ -175,7 +175,6 @@ a { color: inherit; }
   display: flex;
   align-items: center;
   justify-content: center;
-  transform: rotate(-8deg);
   transition: transform 0.2s ease, background 0.2s ease;
   flex-shrink: 0;
   background: transparent;
@@ -184,8 +183,7 @@ a { color: inherit; }
   content: "";
   position: absolute;
   inset: 5px;
-  border: 1px dashed var(--amber-ink);
-  border-radius: 50%;
+  /*border-radius: 0%;*/
 }
 .resume-stamp-ring {
   display: flex;
@@ -198,15 +196,13 @@ a { color: inherit; }
   line-height: 1.5;
 }
 .resume-stamp:hover {
-  transform: rotate(0deg) scale(1.05);
-  background: var(--amber);
+  background: var(--paper-card);
   color: var(--ink);
 }
 .resume-stamp:hover::before { border-color: var(--ink); }
 
 .resume-stamp--small {
   --stamp-size: 44px;
-  transform: rotate(-8deg);
 }
 .resume-stamp--small span {
   font-size: 9px;
