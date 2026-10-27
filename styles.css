@@ -255,7 +255,7 @@ a { color: inherit; }
   letter-spacing: 0.02em;
 }
 .hero-copy {
-  max-width: 56ch;
+  max-width: 70ch;
   margin: 24px 0 0;
   color: var(--ink-soft);
   font-size: 1.05rem;
