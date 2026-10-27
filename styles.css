@@ -255,7 +255,7 @@ a { color: inherit; }
   letter-spacing: 0.02em;
 }
 .hero-copy {
-  max-width: 70ch;
+  max-width: 90ch;
   margin: 24px 0 0;
   color: var(--ink-soft);
   font-size: 1.05rem;
@@ -493,3 +493,105 @@ a { color: inherit; }
   color: var(--ink-soft);
   letter-spacing: 0.04em;
 }
+
+/* =========================================================
+   VOLUNTEERING — ALTERNATING ROWS
+   Append this block to the end of styles.css.
+   Nothing above it is modified.
+   ========================================================= */
+
+.vol-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: clamp(48px, 8vw, 84px);
+}
+
+/* Hairline separator between entries, matching the section rules */
+.vol-item + .vol-item {
+  border-top: 1px solid var(--line);
+  padding-top: clamp(48px, 8vw, 84px);
+}
+
+/* One entry = text + photo. Single column by default (mobile). */
+.vol-item {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: clamp(20px, 4vw, 40px);
+  align-items: center;
+}
+
+/* ---- Two columns from 840px up: text left, photo right ---- */
+@media (min-width: 840px) {
+  .vol-item {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: clamp(32px, 5vw, 72px);
+  }
+
+  /* Every second entry flips the sides — the stagger */
+  .vol-item:nth-child(even) .vol-text  { order: 2; }
+  .vol-item:nth-child(even) .vol-photo { order: 1; }
+}
+
+/* ---- Text column ---- */
+.vol-index {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  color: var(--blue-soft);
+  margin-bottom: 10px;
+}
+.vol-date {
+  font-family: var(--mono);
+  font-size: 12px;
+  letter-spacing: 0.04em;
+  color: var(--blue);
+  margin-bottom: 8px;
+}
+.vol-title {
+  font-size: clamp(1.25rem, 2.4vw, 1.6rem);
+  margin-bottom: 4px;
+}
+.vol-org {
+  font-size: 0.9rem;
+  color: var(--ink-soft);
+  margin: 0 0 14px;
+}
+.vol-desc {
+  color: var(--ink-soft);
+  margin: 0 0 18px;
+}
+
+/* ---- Photo frame ---- */
+.vol-photo {
+  position: relative;
+  margin: 0;
+  aspect-ratio: 4 / 3;
+  background: var(--paper-card);
+  border: 1px solid var(--line);
+  overflow: hidden;
+}
+.vol-photo img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.45s ease;
+}
+.vol-item:hover .vol-photo img { transform: scale(1.03); }
+
+/* Caption sits as a small chip so it stays legible over a photo */
+.vol-photo .about-photo-label {
+  bottom: 10px;
+  background: var(--paper-card);
+  border: 1px solid var(--line);
+  padding: 3px 8px;
+}
+
+/* Reduced motion: kill the photo zoom */
+@media (prefers-reduced-motion: reduce) {
+  .vol-item:hover .vol-photo img { transform: none; }
+}
+
