@@ -595,3 +595,81 @@ a { color: inherit; }
   .vol-item:hover .vol-photo img { transform: none; }
 }
 
+
+
+
+
+
+
+
+
+
+
+
+
+/* --- Timeline variant without the left border --- */
+.timeline.slim {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  border-left: none;
+}
+
+.timeline.slim .timeline-item {
+  padding: 0 0 32px 28px;
+}
+
+.timeline.slim .timeline-item:last-child {
+  padding-bottom: 0;
+}
+
+/* Smaller dot marker */
+.timeline.slim .timeline-item::before {
+  left: -4px;
+  top: 6px;
+  width: 7px;
+  height: 7px;
+}
+
+/* Tighten internal spacing within each timeline item */
+.timeline.slim .timeline-date {
+  margin-bottom: 4px;
+}
+.timeline.slim .timeline-org {
+  margin: 0 0 6px;
+}
+.timeline.slim .timeline-body p:last-child {
+  margin: 0;
+}
+
+/* --- Section spacing --- */
+#volunteering,
+#education {
+  padding: clamp(40px, 8vw, 72px) var(--gutter);
+  border-top: 1px solid var(--line);
+}
+
+/* Optional: remove the border between sections for more cohesion */
+/* #education { border-top: none; } */
+
+/* --- Action button for section --- */
+.section-action {
+  margin-top: 28px;
+}
+.btn-secondary {
+  font-family: var(--mono);
+  font-size: 12.5px;
+  letter-spacing: 0.02em;
+  text-decoration: none;
+  padding: 11px 22px;
+  border: 1px solid var(--line);
+  color: var(--ink-soft);
+  transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+  display: inline-block;
+}
+.btn-secondary:hover {
+  background: var(--paper);
+  color: var(--ink);
+  border-color: var(--ink);
+}
+
