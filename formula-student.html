@@ -94,6 +94,46 @@
       <h2 style="font-size:1.3rem; margin-bottom:12px;">Result</h2>
       <p style="color:var(--ink-soft); margin-bottom:32px;">This project is currently underway, I will update this once I have more to show!</p>
 
+      <!-- GALLERY — copy a <figure> block to add more photos -->
+      <h2 style="font-size:1.3rem; margin-bottom:12px;">Gallery</h2>
+      <div class="proj-gallery">
+        <figure class="proj-fig">
+          <a href="images/fsaem2025.webp">
+            <div class="proj-fig-frame">
+              <img src="images/fsaem2025.webp" alt="FSAE Michigan 2025">
+            </div>
+          </a>
+          <figcaption>FSAE Michigan 2025</figcaption>
+        </figure>
+        <figure class="proj-fig">
+          <a href="images/fsaem2024.webp">
+            <div class="proj-fig-frame">
+              <img src="images/fsaem2024.webp" alt="FSAE Michigan 2024">
+            </div>
+          </a>
+          <figcaption>FSAE Michigan 2024</figcaption>
+        </figure>
+        <figure class="proj-fig">
+          <a href="images/fsaem2023.webp">
+            <div class="proj-fig-frame">
+              <img src="images/fsaem2023.webp" alt="FSAE Michigan 2023">
+            </div>
+          </a>
+          <figcaption>FSAE Michigan 2023</figcaption>
+        </figure>
+        <figure class="proj-fig">
+          <a href="images/fsaem2022.webp">
+            <div class="proj-fig-frame">
+              <img src="images/fsaem2022.webp" alt="FSAE Michigan 2022">
+            </div>
+          </a>
+          <figcaption>FSAE Michigan 2022</figcaption>
+        </figure>
+      </div>
+      
+      <!-- Removed Repo Button Temporarily -->
+      <!-- <a href="#" class="btn btn-primary" target="_blank" rel="noopener">View live / repo →</a> -->
+
       <!-- Removed Repo Button Temporarily -->
       <!-- <a href="#" class="btn btn-primary" target="_blank" rel="noopener">View live / repo →</a> -->
     </div>
@@ -107,6 +147,104 @@
     <span>© 2026</span>
   </div>
 </footer>
+
+<script>
+(function () {
+  // If a photo file doesn't exist yet, show a clean empty box instead of a broken image
+  document.querySelectorAll('.proj-fig-frame img').forEach(function (img) {
+    function markEmpty() { img.closest('.proj-fig-frame').classList.add('is-empty'); }
+    if (img.complete && img.naturalWidth === 0) markEmpty();
+    img.addEventListener('error', markEmpty);
+  });
+
+  // Add the four corner marks to every photo frame
+  document.querySelectorAll('.proj-fig-frame').forEach(function (frame) {
+    ['tl', 'tr', 'bl', 'br'].forEach(function (pos) {
+      const c = document.createElement('span');
+      c.className = 'corner corner-' + pos;
+      c.setAttribute('aria-hidden', 'true');
+      frame.appendChild(c);
+    });
+  });
+
+  // Lightbox: click a photo to view it large, with arrows to move between photos
+  const box = document.createElement('div');
+  box.className = 'lightbox';
+  box.setAttribute('role', 'dialog');
+  box.setAttribute('aria-modal', 'true');
+  box.innerHTML =
+    '<button class="lightbox-close" aria-label="Close">CLOSE ✕</button>' +
+    '<button class="lightbox-arrow lightbox-prev" aria-label="Previous photo">‹</button>' +
+    '<img alt="">' +
+    '<p class="lightbox-caption"></p>' +
+    '<button class="lightbox-arrow lightbox-next" aria-label="Next photo">›</button>';
+  document.body.appendChild(box);
+  const big = box.querySelector('img');
+  const cap = box.querySelector('.lightbox-caption');
+  const prevBtn = box.querySelector('.lightbox-prev');
+  const nextBtn = box.querySelector('.lightbox-next');
+  let photos = [];
+  let current = 0;
+
+  function show(i) {
+    current = (i + photos.length) % photos.length; // wraps around at the ends
+    const link = photos[current];
+    const img = link.querySelector('img');
+    const href = link.getAttribute('href');
+    big.src = (href && href !== '#') ? href : img.src;
+    big.alt = img.alt;
+    const fc = link.closest('.proj-fig').querySelector('figcaption');
+    const count = photos.length > 1
+      ? '<span class="lightbox-count">' + (current + 1) + ' / ' + photos.length + '</span>'
+      : '';
+    cap.innerHTML = count + (fc ? fc.innerHTML : '');
+    prevBtn.hidden = nextBtn.hidden = photos.length < 2;
+  }
+
+  function open(link) {
+    photos = Array.from(document.querySelectorAll('.proj-fig a'))
+      .filter(function (a) { return !a.querySelector('.is-empty'); });
+    show(photos.indexOf(link));
+    box.classList.add('is-open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function close() {
+    box.classList.remove('is-open');
+    document.body.style.overflow = '';
+  }
+
+  document.querySelectorAll('.proj-fig a').forEach(function (link) {
+    link.addEventListener('click', function (e) {
+      e.preventDefault();
+      if (link.querySelector('.is-empty')) return; // nothing to enlarge yet
+      open(link);
+    });
+  });
+
+  prevBtn.addEventListener('click', function (e) { e.stopPropagation(); show(current - 1); });
+  nextBtn.addEventListener('click', function (e) { e.stopPropagation(); show(current + 1); });
+  big.addEventListener('click', function (e) { e.stopPropagation(); });
+  box.addEventListener('click', close); // clicking the dark background or CLOSE closes it
+
+  document.addEventListener('keydown', function (e) {
+    if (!box.classList.contains('is-open')) return;
+    if (e.key === 'Escape') close();
+    if (e.key === 'ArrowLeft') show(current - 1);
+    if (e.key === 'ArrowRight') show(current + 1);
+  });
+
+  // Swipe left/right on phones
+  let startX = null;
+  box.addEventListener('touchstart', function (e) { startX = e.touches[0].clientX; }, { passive: true });
+  box.addEventListener('touchend', function (e) {
+    if (startX === null) return;
+    const dx = e.changedTouches[0].clientX - startX;
+    if (Math.abs(dx) > 50 && photos.length > 1) show(current + (dx < 0 ? 1 : -1));
+    startX = null;
+  });
+})();
+</script>
 
 </body>
 </html>

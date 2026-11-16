@@ -105,7 +105,7 @@ a { color: inherit; }
 }
 .nav-links a { text-decoration: none; color: var(--ink-soft); }
 .nav-links > a:hover { color: var(--blue); }
-/* @media (max-width: 700px) { .nav-links { display: none; } } /* REMOVED FOR MOBILE SITE MAYBE REMOVE LATER??
+/* @media (max-width: 700px) { .nav-links { display: none; } } REMOVED FOR MOBILE SITE MAYBE REMOVE LATER?? */
 
 /* Projects dropdown */
 .nav-item {
@@ -692,18 +692,6 @@ section[id] { scroll-margin-top: 72px; }
   .vol-item:hover .vol-photo img { transform: none; }
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
 /* --- Timeline variant without the left border --- */
 .timeline.slim {
   list-style: none;
@@ -770,3 +758,190 @@ section[id] { scroll-margin-top: 72px; }
   border-color: var(--ink);
 }
 
+/* =========================================================
+   PROJECT PAGE — FIGURES & GALLERY
+   ========================================================= */
+
+/* A single photo with a caption underneath */
+.proj-fig {
+  margin: 0 0 40px;
+}
+.proj-fig-frame {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  background: var(--paper-card);
+  border: 1px solid var(--line);
+  overflow: hidden;
+}
+.proj-fig-frame img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.45s ease;
+}
+.proj-fig a:hover img { transform: scale(1.03); }
+
+.proj-fig figcaption {
+  margin-top: 10px;
+  font-size: 0.9rem;
+  color: var(--ink-soft);
+}
+.proj-fig figcaption span {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  color: var(--blue);
+  margin-right: 8px;
+}
+
+/* Gallery: a grid of smaller photos */
+.proj-gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 20px;
+  margin: 0 0 40px;
+}
+.proj-gallery .proj-fig { margin: 0; }
+.proj-gallery .proj-fig-frame { aspect-ratio: 4 / 3; }
+
+/* Two photos side by side (stacks on phones) */
+.proj-gallery--two {
+  grid-template-columns: 1fr;
+}
+@media (min-width: 700px) {
+  .proj-gallery--two { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .proj-fig a:hover img { transform: none; }
+}
+
+/* =========================================================
+   PROJECT PAGE — HOVER POP-OUT
+   ========================================================= */
+@media (hover: hover) and (min-width: 700px) {
+  .proj-gallery:not(.proj-gallery--two) .proj-fig {
+    position: relative;
+    transition: transform 0.25s ease;
+  }
+  .proj-gallery:not(.proj-gallery--two) .proj-fig:hover {
+    transform: scale(1.1);
+    z-index: 3;
+  }
+  .proj-gallery:not(.proj-gallery--two) .proj-fig:hover .proj-fig-frame {
+    border-color: var(--ink);
+    box-shadow: 0 8px 20px rgba(22, 35, 47, 0.15);
+  }
+  .proj-gallery:not(.proj-gallery--two) .proj-fig:hover img { transform: none; }
+  .proj-gallery:not(.proj-gallery--two) .proj-fig:hover figcaption { opacity: 0; }
+}
+
+/* Corner marks sit on top of the photo */
+.proj-fig-frame .corner { z-index: 1; }
+
+/* =========================================================
+   PROJECT PAGE — EMPTY PHOTO PLACEHOLDERS
+   ========================================================= */
+.proj-fig-frame.is-empty img { display: none; }
+.proj-fig-frame.is-empty::after {
+  content: "PHOTO TO COME";
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  color: var(--line);
+}
+.proj-fig a:has(.is-empty) { cursor: default; }
+.proj-gallery .proj-fig:has(.proj-fig-frame.is-empty):hover { transform: none; }
+.proj-gallery .proj-fig:hover .proj-fig-frame.is-empty {
+  box-shadow: none;
+  border-color: var(--line);
+}
+
+/* =========================================================
+   LIGHTBOX (full-screen photo view)
+   ========================================================= */
+.proj-fig a { cursor: zoom-in; }
+.lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  background: rgba(22, 35, 47, 0.9);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  padding: var(--gutter);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.2s ease, visibility 0.2s ease;
+  cursor: zoom-out;
+}
+.lightbox.is-open { opacity: 1; visibility: visible; }
+.lightbox img {
+  max-width: 100%;
+  max-height: 82vh;
+  object-fit: contain;
+  border: 1px solid var(--line);
+  background: var(--paper-card);
+  cursor: default;
+}
+.lightbox-caption {
+  margin: 0;
+  font-family: var(--mono);
+  font-size: 12px;
+  letter-spacing: 0.04em;
+  color: var(--paper);
+  text-align: center;
+}
+.lightbox-caption span { color: var(--blue-soft); margin-right: 8px; }
+.lightbox-caption .lightbox-count { color: var(--line); margin-right: 12px; }
+.lightbox-close {
+  position: absolute;
+  top: 16px;
+  right: 20px;
+  background: none;
+  border: 1px solid var(--paper);
+  color: var(--paper);
+  font-family: var(--mono);
+  font-size: 12px;
+  letter-spacing: 0.04em;
+  padding: 6px 12px;
+  cursor: pointer;
+}
+.lightbox-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(22, 35, 47, 0.6);
+  border: 1px solid var(--paper);
+  color: var(--paper);
+  font-family: var(--mono);
+  font-size: 24px;
+  line-height: 1;
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+.lightbox-arrow[hidden] { display: none; }
+.lightbox-prev { left: 16px; }
+.lightbox-next { right: 16px; }
+.lightbox-arrow:hover,
+.lightbox-close:hover { background: var(--paper); color: var(--ink); }
+
+/* Keep lightbox arrows beside the photo, not on top of it */
+@media (min-width: 700px) {
+  .lightbox { padding-left: 84px; padding-right: 84px; }
+}

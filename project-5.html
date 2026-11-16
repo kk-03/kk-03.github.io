@@ -75,15 +75,18 @@
       <span class="tag">Driver Development</span>
     </div>
 
-    <div class="about-photo" aria-hidden="true" style="aspect-ratio:16/9; max-width:1000px; margin-bottom:48px;">
-      <span class="corner corner-tl"></span>
-      <span class="corner corner-tr"></span>
-      <span class="corner corner-bl"></span>
-      <span class="corner corner-br"></span>
-      <span class="about-photo-label">FIG. 1 — SCREENSHOT / DIAGRAM</span>
-    </div>
-
     <div style="max-width:100ch;">
+
+      <!-- FIG. 1 — main photo -->
+      <figure class="proj-fig">
+        <a href="images/project-5/main.jpg">
+          <div class="proj-fig-frame">
+            <img src="images/project-5/main.jpg" alt="Formula Student car in Assetto Corsa">
+          </div>
+        </a>
+        <figcaption><span>FIG. 1</span>The Formula Student car running in Assetto Corsa</figcaption>
+      </figure>
+
       <h2 style="font-size:1.3rem; margin-bottom:12px;">The problem</h2>
       <p style="color:var(--ink-soft); margin-bottom:32px;">Driver-in-the-loop simulation software can be expensive, but is very beneficial to a racing driver and team in this day in age. Not only does it help the driver get aqainted with the car, it allows them to give input on handling before driving. This can be valuable to the engineering team to make design adjustments to try and meet the drivers requests with the purpose of reducing laptime.</p>
 
@@ -91,9 +94,69 @@
       <p style="color:var(--ink-soft); margin-bottom:32px;">Assetto Corsa was picked as the software to use due to it's popularity and low price while still providing enough physics input to make a model that should be able to reflect the handling and acceleration of a Formula Student vehicle. 
       Initially, data was taken from the CAD model of the car to determine the suspension pick-up points, wheelbase, and track width. The Formula SAE Tire Test Consotium was as used as the baseline for the tire data.</p>
 
+      <!-- FIG. 2 — photo for "What I built" -->
+      <!-- <figure class="proj-fig">
+        <a href="images/project-5/cad-pickups.jpg">
+          <div class="proj-fig-frame">
+            <img src="images/project-5/cad-pickups.jpg" alt="CAD model showing suspension pick-up points">
+          </div>
+        </a>
+        <figcaption><span>FIG. 2</span>Suspension pick-up points taken from the CAD model</figcaption>
+      </figure>
+      -->
+      
       <h2 style="font-size:1.3rem; margin-bottom:12px;">Result</h2>
       <p style="color:var(--ink-soft); margin-bottom:32px;">While still continuously evolving the simulator model of the car gives laptimes within 2% of tested on track laptimes and has similar characteristics, this can be seen through comparing accelerations, oversteer, steering input, etc. In the future this should move to a Matlab/Simulink model to give our team more control over the behind the scenes calculations to tailor them more to our liking and to increase the fidelity in our model as we gain a better unstanding. Using Assetto Corsa, while readily available requires trial and error due to the models, especially tire models.</p>
 
+      <!-- FIG. 3 & 4 — side by side -->
+      <!-- <div class="proj-gallery proj-gallery--two">
+        <figure class="proj-fig">
+          <a href="images/project-5/sim-lap.jpg">
+            <div class="proj-fig-frame">
+              <img src="images/project-5/sim-lap.jpg" alt="Simulator lap data">
+            </div>
+          </a>
+          <figcaption><span>FIG. 3</span>Simulator lap</figcaption>
+        </figure>
+        <figure class="proj-fig">
+          <a href="images/project-5/track-lap.jpg">
+            <div class="proj-fig-frame">
+              <img src="images/project-5/track-lap.jpg" alt="On-track lap data">
+            </div>
+          </a>
+          <figcaption><span>FIG. 4</span>On-track lap</figcaption>
+        </figure>
+      </div>
+      -->
+      <!-- GALLERY — copy a <figure> block to add more photos -->
+      <!-- <h2 style="font-size:1.3rem; margin-bottom:12px;">Gallery</h2>
+      <div class="proj-gallery">
+        <figure class="proj-fig">
+          <a href="images/project-5/gallery-1.jpg">
+            <div class="proj-fig-frame">
+              <img src="images/project-5/gallery-1.jpg" alt="Simulator rig">
+            </div>
+          </a>
+          <figcaption>Simulator rig</figcaption>
+        </figure>
+        <figure class="proj-fig">
+          <a href="images/project-5/gallery-2.jpg">
+            <div class="proj-fig-frame">
+              <img src="images/project-5/gallery-2.jpg" alt="Driver training session">
+            </div>
+          </a>
+          <figcaption>Driver training session</figcaption>
+        </figure>
+        <figure class="proj-fig">
+          <a href="images/project-5/gallery-3.jpg">
+            <div class="proj-fig-frame">
+              <img src="images/project-5/gallery-3.jpg" alt="Tire model tuning">
+            </div>
+          </a>
+          <figcaption>Tire model tuning</figcaption>
+        </figure>
+      </div>
+      -->
       <!-- Removed Repo Button Temporarily -->
       <!-- <a href="#" class="btn btn-primary" target="_blank" rel="noopener">View live / repo →</a> -->
     </div>
@@ -107,6 +170,43 @@
     <span>© 2026</span>
   </div>
 </footer>
+
+<script>
+(function () {
+  // If a photo file doesn't exist yet, show a clean empty box instead of a broken image
+  document.querySelectorAll('.proj-fig-frame img').forEach(function (img) {
+    function markEmpty() { img.closest('.proj-fig-frame').classList.add('is-empty'); }
+    if (img.complete && img.naturalWidth === 0) markEmpty();
+    img.addEventListener('error', markEmpty);
+  });
+
+  // Lightbox: click a photo to view it large
+  const box = document.createElement('div');
+  box.className = 'lightbox';
+  box.innerHTML = '<button class="lightbox-close" aria-label="Close">CLOSE ✕</button><img alt=""><p class="lightbox-caption"></p>';
+  document.body.appendChild(box);
+  const big = box.querySelector('img');
+  const cap = box.querySelector('.lightbox-caption');
+
+  document.querySelectorAll('.proj-fig a').forEach(function (link) {
+    link.addEventListener('click', function (e) {
+      e.preventDefault();
+      if (link.querySelector('.is-empty')) return; // nothing to enlarge yet
+      const img = link.querySelector('img');
+      const href = link.getAttribute('href');
+      big.src = (href && href !== '#') ? href : img.src;
+      big.alt = img.alt;
+      const fc = link.closest('.proj-fig').querySelector('figcaption');
+      cap.innerHTML = fc ? fc.innerHTML : '';
+      box.classList.add('is-open');
+    });
+  });
+
+  function close() { box.classList.remove('is-open'); }
+  box.addEventListener('click', close);
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape') close(); });
+})();
+</script>
 
 </body>
 </html>
