@@ -945,3 +945,47 @@ section[id] { scroll-margin-top: 72px; }
 @media (min-width: 700px) {
   .lightbox { padding-left: 84px; padding-right: 84px; }
 }
+
+/* =========================================================
+   FSAE PAGE — FACTS, ROLE CARDS, TAKEAWAYS
+   ========================================================= */
+/* Quick-facts strip (reuses .spec-list, four columns on wide screens) */
+.fs-facts { grid-template-columns: repeat(4, 1fr); margin: 0 0 48px; padding: 20px 0; border-bottom: 1px solid var(--line); }
+@media (max-width: 720px) { .fs-facts { grid-template-columns: repeat(2, 1fr); } }
+
+/* Section label + heading used on this page */
+.fs-head { display: flex; align-items: baseline; gap: 14px; margin: 0 0 24px; }
+.fs-head .project-sheet { flex-shrink: 0; }
+.fs-head h2 { font-size: clamp(1.3rem, 2.6vw, 1.6rem); }
+.fs-block { margin: 0 0 64px; }
+
+/* Role cards (reuse .project-grid / .project-card) */
+.role-card ul { margin: 0; padding-left: 18px; color: var(--ink-soft); font-size: 0.95rem; }
+.role-card li { margin-bottom: 6px; }
+.role-grid { grid-template-columns: 1fr; }
+.role-card--lead { grid-column: 1 / -1; }
+
+/* Takeaways */
+.fs-takeaways { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(2, 1fr); gap: 1px; background: var(--line); border: 1px solid var(--line); }
+@media (max-width: 720px) { .fs-takeaways { grid-template-columns: 1fr; } }
+.fs-takeaways li { background: var(--paper-card); padding: 22px 24px; color: var(--ink-soft); font-size: 0.95rem; }
+.fs-takeaways strong { display: block; font-family: var(--display); color: var(--ink); font-size: 1.05rem; margin-bottom: 6px; }
+
+/* Photo strip inside each role card (uses the same lightbox as the gallery) */
+.role-photos { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-top: 6px; }
+@media (max-width: 720px) { .role-photos { grid-template-columns: repeat(2, 1fr); } }
+.role-photos .proj-fig { margin: 0; }
+.role-photos .proj-fig-frame { aspect-ratio: 4 / 3; }
+.role-photos .proj-fig-frame .corner { width: 9px; height: 9px; }
+.role-photos .corner-tl, .role-photos .corner-tr { top: 6px; }
+.role-photos .corner-bl, .role-photos .corner-br { bottom: 6px; }
+.role-photos .corner-tl, .role-photos .corner-bl { left: 6px; }
+.role-photos .corner-tr, .role-photos .corner-br { right: 6px; }
+.role-photos figcaption { display: none; }  /* captions still show in the lightbox */
+.role-photos .proj-fig-frame.is-empty::after { font-size: 9px; }
+
+/* Key project callout */
+.role-key { margin-top: 6px; padding: 16px 18px; background: var(--paper); border-left: 2px solid var(--blue); }
+.role-key-label { font-family: var(--mono); font-size: 10.5px; letter-spacing: 0.06em; color: var(--blue); margin-bottom: 4px; }
+.role-key h4 { font-family: var(--display); font-size: 1.02rem; margin: 0 0 6px; color: var(--ink); }
+.role-key p { margin: 0 0 10px; color: var(--ink-soft); font-size: 0.92rem; }
