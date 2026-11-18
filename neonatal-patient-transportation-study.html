@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Neonatal Patient Transportation Study — Kaelan Khan</title>
+<title>Neonatal Patient Transportation Project — Kaelan Khan</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
@@ -61,9 +61,9 @@
       <span>REV. 2026</span>
     </div>
 
-    <h1 style="font-family:var(--display); font-size:clamp(2rem,5vw,3.2rem); margin-bottom:16px;">Neonatal Patient Transportation Study</h1>
+    <h1 style="font-family:var(--display); font-size:clamp(2rem,5vw,3.2rem); margin-bottom:16px;">Neonatal Patient Transportation Project</h1>
     <p style="max-width:90ch; color:var(--ink-soft); font-size:1.1rem; margin-bottom:32px;">
-      This study explores the effects of sustained acceleration and shock on neonatal patients being transported in ground and air ambulances.
+      This study explores the effects of sustained acceleration and shock on neonatal patients being transported in ground ambulances.
     </p>
 
     <div class="tag-row" style="margin-bottom:48px;">
@@ -74,22 +74,50 @@
     </div>
 
     <div class="about-photo" aria-hidden="true" style="aspect-ratio:16/9; max-width:1000px; margin-bottom:48px;">
-      <span class="corner corner-tl"></span>
-      <span class="corner corner-tr"></span>
-      <span class="corner corner-bl"></span>
-      <span class="corner corner-br"></span>
-      <span class="about-photo-label">FIG. 1 — SCREENSHOT / DIAGRAM</span>
+      <img src="images/neonatal/data_browser.png" alt="">
+      <span class="about-photo-label">FIG. 1 — Data Browser and Cut-off Freq. Comparison</span>
     </div>
 
     <div style="max-width:90ch;">
       <h2 style="font-size:1.3rem; margin-bottom:12px;">The problem</h2>
-      <p style="color:var(--ink-soft); margin-bottom:32px;">Most research for neonatal patient transportation reviews the effects of noise and vibration, but there seems to be a gap in research on sustained acceleration. and shocks that can occur during braking, cornering, acceleration in ground ambulances and take-off and landing in air ambulances. This study looks to explore the effects that these might have on the well-being of a neonatal patient.</p>
+      <p style="color:var(--ink-soft); margin-bottom:32px;">Most research on neonatal patient transport reviews the effects of noise and vibration, but there seems to be a gap in research on sustained acceleration and shocks that can occur during braking, cornering and acceleration in ground ambulances. This study looks to explore the effects that these might have on the well-being of a neonatal patient.</p>
 
       <h2 style="font-size:1.3rem; margin-bottom:12px;">What I built</h2>
-      <p style="color:var(--ink-soft); margin-bottom:32px;">This project is currently underway, I will update this once I have more to show!</p>
+      <p style="color:var(--ink-soft); margin-bottom:32px;">I have reviewed 4 hours of ambulance transport including accelerometer, gyro and GPS data. Processing this data before performing any analysis is essential. First I wanted to determine how to filter it. I did this by determining a cut-off frequency... More to come later!</p>
 
       <h2 style="font-size:1.3rem; margin-bottom:12px;">Result</h2>
-      <p style="color:var(--ink-soft); margin-bottom:32px;">This project is currently underway, I will update this once I have more to show!</p>
+      <p style="color:var(--ink-soft); margin-bottom:32px;">This project is currently underway. I will update this once I have more to show!</p>
+
+      <!-- GALLERY — copy a <figure> block to add more photos.
+           Put the image files in images/neonatal/ and match the names below.
+           Any photo that doesn't exist yet shows as a "PHOTO TO COME" box. -->
+      <h2 style="font-size:1.3rem; margin-bottom:12px;">Gallery</h2>
+      <div class="proj-gallery">
+        <figure class="proj-fig">
+          <a href="images/neonatal/transport1.png">
+            <div class="proj-fig-frame">
+              <img src="images/neonatal/transport1.png" alt="Transport 1 Data Analysis">
+            </div>
+          </a>
+          <figcaption>Transport 1 Data Analysis</figcaption>
+        </figure>
+        <figure class="proj-fig">
+          <a href="images/neonatal/gps_map.png">
+            <div class="proj-fig-frame">
+              <img src="images/neonatal/gps_map.png" alt="Transport Map">
+            </div>
+          </a>
+          <figcaption>Transport Map</figcaption>
+        </figure>
+        <figure class="proj-fig">
+          <a href="images/neonatal/transport_events.png">
+            <div class="proj-fig-frame">
+              <img src="images/neonatal/transport_events.png" alt="Transport Acceleration Events per Hour">
+            </div>
+          </a>
+          <figcaption>Transport Acceleration Events per Hour</figcaption>
+        </figure>
+      </div>
 
       <!-- Removed Repo Button Temporarily -->
       <!-- <a href="#" class="btn btn-primary" target="_blank" rel="noopener">View live / repo →</a> -->
@@ -100,10 +128,108 @@
 <footer class="footer">
   <div class="footer-inner">
     <span>KAELAN KHAN — ENG. PORTFOLIO</span>
-    <span>Neonatal Patient Transportation Study</span>
+    <span>Neonatal Patient Transportation Project</span>
     <span>© 2026</span>
   </div>
 </footer>
+
+<script>
+(function () {
+  // If a photo file doesn't exist yet, show a clean empty box instead of a broken image
+  document.querySelectorAll('.proj-fig-frame img').forEach(function (img) {
+    function markEmpty() { img.closest('.proj-fig-frame').classList.add('is-empty'); }
+    if (img.complete && img.naturalWidth === 0) markEmpty();
+    img.addEventListener('error', markEmpty);
+  });
+
+  // Add the four corner marks to every photo frame
+  document.querySelectorAll('.proj-fig-frame').forEach(function (frame) {
+    ['tl', 'tr', 'bl', 'br'].forEach(function (pos) {
+      const c = document.createElement('span');
+      c.className = 'corner corner-' + pos;
+      c.setAttribute('aria-hidden', 'true');
+      frame.appendChild(c);
+    });
+  });
+
+  // Lightbox: click a photo to view it large, with arrows to move between photos
+  const box = document.createElement('div');
+  box.className = 'lightbox';
+  box.setAttribute('role', 'dialog');
+  box.setAttribute('aria-modal', 'true');
+  box.innerHTML =
+    '<button class="lightbox-close" aria-label="Close">CLOSE ✕</button>' +
+    '<button class="lightbox-arrow lightbox-prev" aria-label="Previous photo">‹</button>' +
+    '<img alt="">' +
+    '<p class="lightbox-caption"></p>' +
+    '<button class="lightbox-arrow lightbox-next" aria-label="Next photo">›</button>';
+  document.body.appendChild(box);
+  const big = box.querySelector('img');
+  const cap = box.querySelector('.lightbox-caption');
+  const prevBtn = box.querySelector('.lightbox-prev');
+  const nextBtn = box.querySelector('.lightbox-next');
+  let photos = [];
+  let current = 0;
+
+  function show(i) {
+    current = (i + photos.length) % photos.length; // wraps around at the ends
+    const link = photos[current];
+    const img = link.querySelector('img');
+    const href = link.getAttribute('href');
+    big.src = (href && href !== '#') ? href : img.src;
+    big.alt = img.alt;
+    const fc = link.closest('.proj-fig').querySelector('figcaption');
+    const count = photos.length > 1
+      ? '<span class="lightbox-count">' + (current + 1) + ' / ' + photos.length + '</span>'
+      : '';
+    cap.innerHTML = count + (fc ? fc.innerHTML : '');
+    prevBtn.hidden = nextBtn.hidden = photos.length < 2;
+  }
+
+  function open(link) {
+    photos = Array.from(document.querySelectorAll('.proj-fig a'))
+      .filter(function (a) { return !a.querySelector('.is-empty'); });
+    show(photos.indexOf(link));
+    box.classList.add('is-open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function close() {
+    box.classList.remove('is-open');
+    document.body.style.overflow = '';
+  }
+
+  document.querySelectorAll('.proj-fig a').forEach(function (link) {
+    link.addEventListener('click', function (e) {
+      e.preventDefault();
+      if (link.querySelector('.is-empty')) return; // nothing to enlarge yet
+      open(link);
+    });
+  });
+
+  prevBtn.addEventListener('click', function (e) { e.stopPropagation(); show(current - 1); });
+  nextBtn.addEventListener('click', function (e) { e.stopPropagation(); show(current + 1); });
+  big.addEventListener('click', function (e) { e.stopPropagation(); });
+  box.addEventListener('click', close); // clicking the dark background or CLOSE closes it
+
+  document.addEventListener('keydown', function (e) {
+    if (!box.classList.contains('is-open')) return;
+    if (e.key === 'Escape') close();
+    if (e.key === 'ArrowLeft') show(current - 1);
+    if (e.key === 'ArrowRight') show(current + 1);
+  });
+
+  // Swipe left/right on phones
+  let startX = null;
+  box.addEventListener('touchstart', function (e) { startX = e.touches[0].clientX; }, { passive: true });
+  box.addEventListener('touchend', function (e) {
+    if (startX === null) return;
+    const dx = e.changedTouches[0].clientX - startX;
+    if (Math.abs(dx) > 50 && photos.length > 1) show(current + (dx < 0 ? 1 : -1));
+    startX = null;
+  });
+})();
+</script>
 
 </body>
 </html>
