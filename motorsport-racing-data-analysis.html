@@ -45,7 +45,7 @@
         </div>
       </div>
       <a href="index.html#contact">Contact</a>
-      
+
     </nav>
     <!--Removing Resume Button-->
     <!--<a class="resume-stamp resume-stamp--small" href="#" target="_blank" rel="noopener">
@@ -55,48 +55,99 @@
 </header>
 
 <main>
-  <section class="section" style="border-top:none; padding-top:clamp(48px,9vw,88px);">
-    <a href="index.html#projects" class="project-link" style="margin-bottom:32px; display:inline-block;">← Back to projects</a>
+  <section class="section pd-top">
+    <a href="index.html#projects" class="project-link pd-back">← Back to projects</a>
 
-    <div class="hero-meta" style="margin-bottom:28px;">
+    <div class="hero-meta">
       <span>SHEET 03</span>
       <span>PROJECT DETAIL</span>
       <span>REV. 2026</span>
     </div>
 
-    <h1 style="font-family:var(--display); font-size:clamp(2rem,5vw,3.2rem); margin-bottom:16px;">Motorsport Data Analysis Tools</h1>
-    <p style="max-width:90ch; color:var(--ink-soft); font-size:1.1rem; margin-bottom:32px;">
-      This project was created to make data analysis during and after testing easier to digest. For powertrain health and performance, vehicle dynamics, driver inputs and aerodynamics.
+    <h1 class="pd-title">Motorsport Data Analysis Tools</h1>
+    <p class="pd-lead">
+      Tools to make data easier to use during and after testing: MoTeC i2 math channels that quantify vehicle handling at the track, and automated reports covering powertrain, vehicle dynamics, driver inputs and aerodynamics.
     </p>
 
-    <div class="tag-row" style="margin-bottom:48px;">
+    <div class="tag-row">
       <span class="tag">Motorsport</span>
-      <span class="tag">Engineering</span>
+      <span class="tag">Vehicle Dynamics</span>
       <span class="tag">Data Analysis</span>
+      <span class="tag">MoTeC i2</span>
+      <span class="tag">MATLAB</span>
     </div>
 
-    <div class="about-photo" aria-hidden="true" style="aspect-ratio:5/3; max-width:1000px; margin-bottom:48px;">
-      <img src="images/data.png" alt="Data Overlay">
-      <span class="corner corner-tl"></span>
-      <span class="corner corner-tr"></span>
-      <span class="corner corner-bl"></span>
-      <span class="corner corner-br"></span>
-      <!-- <span class="about-photo-label">FIG. 1 — SCREENSHOT / DIAGRAM</span> -->
+    <figure class="proj-fig proj-fig--plot">
+      <div class="proj-fig-frame">
+        <img src="images/data/driver-understeer.jpg" alt="Scatter plot of lap time against average understeer coefficient for Driver A and Driver B">
+      </div>
+      <figcaption><span>FIG. 1</span>Lap time vs. average understeer coefficient. Two drivers, same setup, testing before FSAE Michigan. Driver A is about 2 s a lap faster and more consistent. Driver B is quickest with more understeer and drops off badly as the car gets looser. Endurance is a two-driver event, so the setup was built around Driver B.</figcaption>
+    </figure>
+
+    <div class="pd-body">
+      <h2>The problem</h2>
+      <p>In sim racing and in Formula Student, I kept seeing data get recorded and then never used. When someone did open a log during testing or for a project, they often didn't know what they were looking at or what it meant. Handling was judged almost entirely from driver feedback, and most Formula Student drivers aren't experienced enough for that to be reliable.</p>
+
+      <h2>What I built</h2>
+      <p>There are two parts. The first is a MoTeC i2 workbook with custom math channels, so a log can be pulled and reviewed at the track with no extra software. It turns raw sensor data into handling metrics: chassis side slip, tire slip angles, understeer coefficient and yaw moment. The second is a set of MATLAB scripts that sort a session's data into powertrain, vehicle dynamics, driver and aerodynamics sections and write a Word report that can be shared after testing.</p>
+      <p>Most of the channels build on chassis side slip (β). It comes from integrating the difference between the measured yaw rate and the yaw rate expected from speed and lateral acceleration. The integral drifts, so it only runs while the car is steering and resets when lateral acceleration is close to zero:</p>
+      <!-- <pre class="code-block">integrate('Chassis Yaw Rate' [deg/s] - 'Yaw Rate Calc' [deg/s],
+          'Steering Angle' [deg] &gt; 0.05 OR 'Steering Angle' [deg] &lt; -0.05,
+          'CG Accel Lateral' [G] &gt; -0.05 OR 'CG Accel Lateral' [G] &lt; 0.05)</pre> -->
+      <p>Checked against Assetto Corsa's true slip angle, the calculated value stayed within about ±1° and followed the same trend without added noise.</p>
+
+      <h2>Results</h2>
     </div>
 
-    <div style="max-width:100ch;">
-      <h2 style="font-size:1.3rem; margin-bottom:12px;">The problem</h2>
-      <p style="color:var(--ink-soft); margin-bottom:32px;">Too often have I found that when sim racing or actually racing when I participated in Formula Student was data recorded and then nothing was done with it. In another case, someone would try to look at the data during testing or after the fact for working on a project and not understand what they are looking at or what it means.</p>
+    <figure class="proj-fig proj-fig--plot">
+      <div class="proj-fig-frame">
+        <img src="images/data/understeer-distance.png" alt="Understeer coefficient plotted against distance through a corner, annotated at turn-in, apex and direction change">
+      </div>
+      <figcaption><span>FIG. 2</span>Understeer coefficient vs. distance through a corner. Wet session, March 19. The driver said the front wasn't biting. The data agreed and showed where: understeer builds through the corner and peaks at the apex, with part of it coming from the driver pushing past the limit. A complaint becomes something a setup change can target.</figcaption>
+    </figure>
 
-      <h2 style="font-size:1.3rem; margin-bottom:12px;">What I built</h2>
-      <p style="color:var(--ink-soft); margin-bottom:32px;">Mainly having experience with MoTeC i2 through sim racing and Formula Student, I decided I wanted to improve the environment from the baseline to provide more meaningful information to drivers and engingeers to get a better understanding of what is happening to the car and inside it with the drivers inputs. This way during testing the data log can quickly be pulled and reviewed without need for additional software of complexity in the field. However, in addition to this I also wanted to be able to make easy to digest reports to summarize testing after it is completed. For this I used Matlab to sort relivant data for powertrain, vehicle dynamics, driver and aerodynamics and populate a Word document that can then easily be shared.</p>
+    <div class="pd-center">
+      <figure class="proj-fig proj-fig--plot proj-fig--narrow">
+        <div class="proj-fig-frame">
+          <img src="images/data/pacejka.png" alt="Front-left tire lateral force against slip angle with a fitted Pacejka curve peaking near 10 degrees">
+        </div>
+        <figcaption><span>FIG. 3</span>Front-left tire curve from track data. Calculated slip angle vs. lateral force, with a Pacejka fit (r² = 0.89). Peak force is at about 10° with a slight drop after, close to published FSAE tire data. That gives a target slip angle for drivers and setup. It also showed that a driver who rarely goes past the limit produces too little data to define the curve's peak, so tire tests need to cover it on purpose.</figcaption>
+      </figure>
+    </div>
 
-      <h2 style="font-size:1.3rem; margin-bottom:12px;">Result</h2>
-      <p style="color:var(--ink-soft); margin-bottom:32px;">This project is currently underway, I will update this once I have more to show!</p>
+    <!-- TODO: say which colour is which setup (green / purple) in the caption below. -->
+    <figure class="proj-fig proj-fig--plot">
+      <div class="proj-fig-frame">
+        <img src="images/data/ymd.png" alt="Yaw moment diagram of lateral acceleration against yaw moment with envelopes for two setups">
+      </div>
+      <figcaption><span>FIG. 4</span>Yaw moment diagram, two setups compared. Each envelope bounds one setup. On both, maximum lateral acceleration happens at an understeering yaw moment, so the car stays stable at the limit instead of trying to spin. One setup reaches about 0.4 g more lateral acceleration. These data are from Assetto Corsa (MAD Formula MFT02, a car with wings), because the IMU wasn't logging yaw rate during track testing. The method transfers directly once it is.</figcaption>
+    </figure>
 
-      <h3 style="font-size:1rem; margin-bottom:12px;">Driver</h3>
-      <p style="color:var(--ink-soft); margin-bottom:32px;">The driver is a very complex system that is integral to the performance of the racing car. Additionally, no one driver is the same. Some drivers have more experience, talent, good habits while others may not. There is a few ways I have decided were the most important to start looking at when analyzing drivers.</p>
-      <p style="color:var(--ink-soft); margin-bottom:32px;">One thing that comes up in Formula Student is that most drivers have very little to no racing experience, besides occasional go-karting and simulator racing. This can mean that drivers can be on a very different level. This is important for the endurance event because</p>
+    <div class="pd-body">
+      <h2>Automated reports</h2>
+      <p>Each subsystem gets a channel report in i2, with one column per lap. In each row the lowest value is blue and the highest is red, so trends show without scrolling through traces. In the session behind Fig. 1, lap 7 was fastest. Its column is mostly red: highest average throttle, top speed, average speed and brake pressure, with an average understeer coefficient of −1.93. The engine report does the same for the powertrain team, flagging out-of-range temperatures and pressures by outing.</p>
+      <p>After a session, the MATLAB scripts compile the same channels into a Word report for anyone who wasn't at the track. The report below was generated automatically from my own test stint in the Cadillac V-Series.R on iRacing at Watkins Glen, run to prepare for a National Association of Intercollegiate Racing event there.</p>
+    </div>
+
+    <div class="hero-actions pd-actions">
+      <a href="files/EnduranceRaceDataReport_NAIR_Watkins_Glen.pdf" class="btn btn-primary" target="_blank" rel="noopener">Watkins Glen 2026 report (PDF) →</a>
+    </div>
+    <!-- Add once you have the image: crop of the driver/channel lap report.
+    <figure class="proj-fig proj-fig--plot">
+      <div class="proj-fig-frame">
+        <img src="images/data/channel-report.png" alt="MoTeC i2 channel report table comparing laps, with highest values in red and lowest in blue">
+      </div>
+      <figcaption><span>FIG. 5</span>Driver channel report. One column per lap; red = highest, blue = lowest. Lap 7 (fastest) leads in throttle, speed and brake pressure.</figcaption>
+    </figure>
+    -->
+
+
+
+    <div class="pd-body">
+      <h2>The driver</h2>
+      <p>The driver is a complex part of the system, and no two are the same. Most Formula Student drivers have little racing experience beyond karting and sim racing, so the gap between two drivers on one team can be large.</p>
+      <p>That matters most in endurance, where two drivers share one car and there's no time for a setup change at the driver swap. Fig. 1 shows the trade-off. A looser car might gain Driver A a little time, but it would cost Driver B much more and raise the risk of a spin. Setting the car up for the limiting driver gives the lower total endurance time, and Driver A can adapt.</p>
+      <p>Much of this was developed as part of my capstone on vehicle handling characterization. The instrumentation and validation are covered on the <!-- TODO: set the real filename --><a href="project-4.html" class="project-link">capstone project page →</a></p>
 
       <!-- Removed Repo Button Temporarily -->
       <!-- <a href="#" class="btn btn-primary" target="_blank" rel="noopener">View live / repo →</a> -->

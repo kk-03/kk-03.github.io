@@ -989,3 +989,157 @@ section[id] { scroll-margin-top: 72px; }
 .role-key-label { font-family: var(--mono); font-size: 10.5px; letter-spacing: 0.06em; color: var(--blue); margin-bottom: 4px; }
 .role-key h4 { font-family: var(--display); font-size: 1.02rem; margin: 0 0 6px; color: var(--ink); }
 .role-key p { margin: 0 0 10px; color: var(--ink-soft); font-size: 0.92rem; }
+/* =========================================================
+   PROJECT DETAIL PAGES — LAYOUT, PLOT FIGURES, CODE
+   Append this block to the end of styles.css.
+   Nothing above it is modified.
+   ========================================================= */
+
+/* Page top: replaces the old inline styles on the first section */
+.section.pd-top {
+  border-top: none;
+  padding-top: clamp(48px, 9vw, 88px);
+}
+.pd-back { display: inline-block; margin-bottom: 32px; }
+.pd-top .hero-meta { margin-bottom: 28px; }
+.pd-title {
+  font-family: var(--display);
+  font-size: clamp(2rem, 5vw, 3.2rem);
+  margin-bottom: 16px;
+}
+.pd-lead {
+  max-width: 90ch;
+  margin: 0 0 32px;
+  color: var(--ink-soft);
+  font-size: 1.1rem;
+}
+.pd-top .tag-row { margin-bottom: 48px; }
+
+/* One shared column width for text and figures, so edges line up */
+.pd-top { --pd-col: 100%; }
+
+/* Body text blocks */
+.pd-body { max-width: var(--pd-col); margin-bottom: 40px; }
+.pd-body h2 { font-size: 1.3rem; margin: 40px 0 12px; }
+.pd-body h2:first-child { margin-top: 0; }
+.pd-body h3 { font-size: 1rem; margin: 24px 0 12px; }
+.pd-body p { color: var(--ink-soft); margin: 0 0 16px; }
+
+/* Plot figures: show the whole image (no crop) at its own aspect ratio */
+.proj-fig--plot { max-width: var(--pd-col, 860px); margin-bottom: 48px; }
+/* Plots: show the whole image (no crop) at its own aspect ratio */
+.proj-fig--plot .proj-fig-frame { aspect-ratio: auto; }
+.proj-fig--plot .proj-fig-frame img {
+  position: static;
+  height: auto;
+  object-fit: contain;
+}
+
+/* Single plots (not in a pair): cap the height, and let the frame shrink
+   to the image and centre it, so there are no white bars */
+.proj-fig--plot:not(.pd-pair .proj-fig--plot) .proj-fig-frame {
+  width: fit-content;
+  max-width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+}
+.proj-fig--plot:not(.pd-pair .proj-fig--plot) .proj-fig-frame img {
+  width: auto;
+  max-width: 100%;
+  max-height: 560px;
+}
+
+/* Narrow figure centred in the column (for tall/portrait plots) */
+.pd-center .proj-fig--narrow.proj-fig--plot .proj-fig-frame { width: auto; max-width: 480px; }
+.pd-center .proj-fig--narrow.proj-fig--plot .proj-fig-frame img { width: 100%; max-height: none; }
+
+/* Two figures side by side for comparison. Stacks on phones. */
+.pd-pair {
+  max-width: var(--pd-col, 860px);
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 24px;
+  align-items: start;
+  margin-bottom: 24px;
+}
+.pd-pair .proj-fig--plot { margin-bottom: 0; }
+@media (min-width: 700px) {
+  .pd-pair { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+/* Code / math-channel block */
+.code-block {
+  font-family: var(--mono);
+  font-size: 0.85rem;
+  line-height: 1.6;
+  color: var(--ink);
+  background: var(--paper-card);
+  border: 1px solid var(--line);
+  padding: 16px 20px;
+  margin: 0 0 16px;
+  overflow-x: auto;
+  white-space: pre;
+}
+
+/* Keep existing grids/strips inside the project column */
+.pd-top .fs-facts,
+.pd-grid,
+.pd-gallery,
+.pd-table-wrap,
+.pd-actions { max-width: var(--pd-col, 860px); }
+.pd-grid { margin-bottom: 40px; }
+.pd-gallery { margin-bottom: 40px; }
+.pd-actions { margin: 0 0 56px; }
+
+/* Gallery variant for CAD / diagrams: show the whole image on white */
+.proj-gallery--contain .proj-fig-frame img { object-fit: contain; }
+
+/* Data table */
+.pd-table-wrap { overflow-x: auto; margin-bottom: 40px; }
+.pd-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: var(--paper-card);
+  border: 1px solid var(--line);
+  font-size: 0.92rem;
+}
+.pd-table th {
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--blue-soft);
+  text-align: left;
+  padding: 10px 14px;
+  border-bottom: 1px solid var(--line);
+}
+.pd-table td {
+  padding: 9px 14px;
+  border-bottom: 1px solid var(--line);
+  color: var(--ink-soft);
+}
+.pd-table td + td, .pd-table th + th { text-align: right; font-family: var(--mono); }
+.pd-table tr:last-child td { border-bottom: none; }
+.pd-table tr.is-ref td { color: var(--blue); }
+
+/* Small footnote text */
+.pd-note {
+  max-width: var(--pd-col, 860px);
+  margin: 0;
+  font-size: 0.85rem;
+  color: var(--ink-soft);
+}
+
+/* Hover zoom only on gallery thumbnails, not on main/large figures */
+.proj-fig--plot a:hover img,
+.pd-top > .proj-fig a:hover img { transform: none; }
+
+/* Corner marks removed site-wide */
+.corner { display: none; }
+
+/* Phones: project galleries as a row of 3 small thumbnails (captions show in the lightbox) */
+@media (max-width: 699px) {
+  .pd-gallery { grid-template-columns: repeat(3, 1fr); gap: 10px; }
+  .pd-gallery figcaption { display: none; }
+}

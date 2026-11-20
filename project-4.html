@@ -6,7 +6,7 @@
 <link rel="apple-touch-icon" href="favicon.png">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Tire Data Analysis — Kaelan Khan</title>
+<title>Vehicle Handling Characterization — Kaelan Khan</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
@@ -45,7 +45,7 @@
         </div>
       </div>
       <a href="index.html#contact">Contact</a>
-      
+
     </nav>
     <!--Removing Resume Button-->
     <!--<a class="resume-stamp resume-stamp--small" href="#" target="_blank" rel="noopener">
@@ -55,57 +55,344 @@
 </header>
 
 <main>
-  <section class="section" style="border-top:none; padding-top:clamp(48px,9vw,88px);">
-    <a href="index.html#projects" class="project-link" style="margin-bottom:32px; display:inline-block;">← Back to projects</a>
+  <section class="section pd-top">
+    <a href="index.html#projects" class="project-link pd-back">← Back to projects</a>
 
-    <div class="hero-meta" style="margin-bottom:28px;">
+    <div class="hero-meta">
       <span>SHEET 04</span>
       <span>PROJECT DETAIL</span>
       <span>REV. 2026</span>
     </div>
 
-    <h1 style="font-family:var(--display); font-size:clamp(2rem,5vw,3.2rem); margin-bottom:16px;">Tire Data Analysis</h1>
-    <p style="max-width:90ch; color:var(--ink-soft); font-size:1.1rem; margin-bottom:32px;">
-      This project was created as a part of my 4th year Engineering Capstone project. With the goal of developing quantifiable wheel forces in order to verify a tire model.
+    <h1 class="pd-title">Vehicle Handling Characterization</h1>
+    <p class="pd-lead">
+      My fourth-year engineering capstone at Carleton University. I instrumented Ravens Racing's FSAE car to measure tire loads and temperatures, and built the analysis to turn its data logs into numbers for handling balance, so setup decisions no longer rely on driver feel alone.
     </p>
 
-    <div class="tag-row" style="margin-bottom:48px;">
-      <span class="tag">Engineering</span>
-      <span class="tag">Requirements Development</span>
-      <span class="tag">Mechanical Analysis</span>
+    <div class="tag-row">
+      <span class="tag">Capstone</span>
+      <span class="tag">Vehicle Dynamics</span>
+      <span class="tag">Instrumentation</span>
+      <span class="tag">Design &amp; Validation</span>
+      <span class="tag">MoTeC i2</span>
     </div>
 
-    <div class="about-photo" aria-hidden="true" style="aspect-ratio:16/9; max-width:1000px; margin-bottom:48px;">
-      <span class="corner corner-tl"></span>
-      <span class="corner corner-tr"></span>
-      <span class="corner corner-bl"></span>
-      <span class="corner corner-br"></span>
-      <span class="about-photo-label">FIG. 1 — SCREENSHOT / DIAGRAM</span>
+    <figure class="proj-fig proj-fig--plot">
+      <div class="proj-fig-frame">
+        <img src="images/capstone/looking-at-data.jpg" alt="Reviewing Data Before Attempting Another Run">
+      </div>
+      <figcaption><span>FIG. 1</span>Reviewing Driver and Handling Data Before Attempting Another Run.</figcaption>
+    </figure>
+
+    <dl class="spec-list fs-facts">
+      <div><dt>Course</dt><dd>MAAE4907D Capstone</dd></div>
+      <div><dt>Team / Car</dt><dd>Ravens Racing, RR25</dd></div>
+      <div><dt>Year</dt><dd>2025 – 2026</dd></div>
+      <div><dt>Spent</dt><dd>$294 of $5,722 planned</dd></div>
+    </dl>
+
+    <div class="pd-body">
+      <h2>The problem</h2>
+      <p>Ravens Racing built its setups around driver feedback. Most FSAE drivers are amateurs, and they can't always say reliably what the car is doing. The car carries a MoTeC dash and ECU, but their data was rarely used to make setup or design decisions. In 2025 the team also switched tire compounds, from the LC0 to the R20, with almost no testing to show how it changed the car.</p>
+      <p>The goal: give the team quantitative measures of tire loads, tire temperatures and vehicle balance that can be checked at the track between runs.</p>
+
+      <h2>Requirements</h2>
+      <p>I set three objectives, each with measurable specs. These drove every design decision that followed.</p>
     </div>
 
-    <div style="max-width:100ch;">
-      <h2 style="font-size:1.3rem; margin-bottom:12px;">The problem</h2>
-      <p style="color:var(--ink-soft); margin-bottom:32px;">This project is currently underway, I will update this once I have more to show!</p>
-
-      <h2 style="font-size:1.3rem; margin-bottom:12px;">What I built</h2>
-      <p style="color:var(--ink-soft); margin-bottom:32px;">This project is currently underway, I will update this once I have more to show!</p>
-
-      <h2 style="font-size:1.3rem; margin-bottom:12px;">Result</h2>
-      <p style="color:var(--ink-soft); margin-bottom:32px;">This project is currently underway, I will update this once I have more to show!</p>
-
-      <!-- Removed Repo Button Temporarily -->
-      <!-- <a href="#" class="btn btn-primary" target="_blank" rel="noopener">View live / repo →</a> -->
+    <div class="project-grid pd-grid">
+      <div class="project-card role-card">
+        <div class="project-sheet">OBJ. 1</div>
+        <h3>Tire loads</h3>
+        <ul>
+          <li>Logged at 60 Hz minimum</li>
+          <li>Within ±25 N of actual load</li>
+          <li>Range −50 N to 1300 N per tire</li>
+          <li>Under $2,000, IP54</li>
+          <li>Logs to the team's C185 dash or M150 ECU</li>
+        </ul>
+      </div>
+      <div class="project-card role-card">
+        <div class="project-sheet">OBJ. 2</div>
+        <h3>Tire temperatures</h3>
+        <ul>
+          <li>Logged at 10 Hz minimum</li>
+          <li>Within ±2 °C</li>
+          <li>Range 0 – 80 °C</li>
+          <li>Under $1,500, IP54</li>
+          <li>Logs to the team's C185 dash or M150 ECU</li>
+        </ul>
+      </div>
+      <div class="project-card role-card">
+        <div class="project-sheet">OBJ. 3</div>
+        <h3>Vehicle handling</h3>
+        <ul>
+          <li>Chassis slip within 2° of true slip</li>
+          <li>Understeer / oversteer quantified through a lap</li>
+          <li>Yaw moment quantified through a lap</li>
+          <li>Viewable in MoTeC i2 on a team laptop</li>
+        </ul>
+      </div>
     </div>
+
+    <div class="pd-body">
+      <h2>Concept selection</h2>
+      <p>For tire loads I compared four concepts in a weighted trade study: strain gauges on the pushrods, an inline load cell, damper linear potentiometers and a wheel force transducer. Strain gauges scored highest (4.05). The load cell (3.85) and potentiometers (3.8) were close behind, and the wheel force transducer (2.55) was ruled out on cost and integration. I reran the study with different weights and inputs, and the result held each time. Because the scores were close, I kept the alternatives open, which mattered later in testing.</p>
+      <p>For temperature I used an infrared sensor reading the tire's surface, the same method Calspan uses for the FSAE Tire Test Consortium data, so the two would be directly comparable.</p>
+
+      <h2>Tire temperature mount</h2>
+      <p>The sensor has to stay pointed at the tire's tread as the wheel steers, so it mounts to the upright using the existing upper control arm bolts. That makes it unsprung mass, so it needed to be light: about 160 g in 6061 aluminium angle and flat bar, TIG-welded, with laser-cut base plates. I went through two 3D-printed iterations to stiffen it before the final version.</p>
+    </div>
+
+    <div class="proj-gallery proj-gallery--contain pd-gallery">
+      <figure class="proj-fig">
+        <a href="images/capstone/mount-v1-cad.jpg">
+          <div class="proj-fig-frame">
+            <img src="images/capstone/mount-v1-cad.jpg" alt="First iteration of the tire temperature mount in CAD">
+          </div>
+        </a>
+        <figcaption><span>FIG. 2A</span>Iteration 1: flat plate, small gusset</figcaption>
+      </figure>
+      <figure class="proj-fig">
+        <a href="images/capstone/mount-v2-cad.jpg">
+          <div class="proj-fig-frame">
+            <img src="images/capstone/mount-v2-cad.jpg" alt="Second iteration of the tire temperature mount in CAD, stiffened with angle sections">
+          </div>
+        </a>
+        <figcaption><span>FIG. 2B</span>Iteration 2: angle sections for stiffness</figcaption>
+      </figure>
+      <figure class="proj-fig">
+        <a href="images/capstone/mount-final-cad.jpg">
+          <div class="proj-fig-frame">
+            <img src="images/capstone/mount-final-cad.jpg" alt="Final tire temperature mount design shown on the wheel and tire assembly">
+          </div>
+        </a>
+        <figcaption><span>FIG. 2C</span>Final design on the wheel assembly</figcaption>
+      </figure>
+    </div>
+
+    <div class="pd-body">
+      <p>A bracket hanging off the wheel can't resonate with it, so I checked its natural frequency three ways: a Castigliano hand calculation, a SolidWorks deflection study and a SolidWorks modal analysis. On the simplified geometry, the hand calculation and the simulation agreed to within about 23%, which I then used as the error band. The full mount's lowest mode is 55.8 Hz, well clear of the wheel's natural frequency of about 21 Hz, and the wheel is overdamped at the team's usual damper settings.</p>
+    </div>
+
+    <div class="pd-table-wrap">
+      <table class="pd-table">
+        <thead>
+          <tr><th>Method</th><th>Spring rate (N/m)</th><th>Natural frequency (Hz)</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Simplified geometry, hand calc (Castigliano)</td><td>584</td><td>27.2</td></tr>
+          <tr><td>Simplified geometry, FEA deflection</td><td>888</td><td>33.5</td></tr>
+          <tr><td>Full geometry, FEA deflection</td><td>16,332</td><td>143.8</td></tr>
+          <tr><td>Full geometry, FEA modal (1st mode)</td><td>—</td><td>55.8</td></tr>
+          <tr class="is-ref"><td>Wheel package (front and rear)</td><td>—</td><td>≈ 21</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="pd-body">
+      <h2>Tire load measurement</h2>
+      <p>Each pushrod got a half-bridge of 350 Ω strain gauges, one axial and one around the tube's circumference for temperature compensation, completed with precision resistors. They feed IZZE Racing amplifiers that put the readings on the car's CAN bus at 100 Hz. Pushrod force then converts to vertical tire load through the suspension geometry. I built the harness myself with crimped DTM connectors to match the team's wiring standard.</p>
+    </div>
+
+    <div class="proj-gallery pd-gallery">
+      <figure class="proj-fig">
+        <a href="images/capstone/strain-gauge-pushrod.jpg">
+          <div class="proj-fig-frame">
+            <img src="images/capstone/strain-gauge-pushrod.jpg" alt="Strain gauge bonded to a suspension pushrod on the car">
+          </div>
+        </a>
+        <figcaption><span>FIG. 3A</span>Strain gauge bridge on a pushrod</figcaption>
+      </figure>
+      <figure class="proj-fig">
+        <a href="images/capstone/harness-crimping.jpg">
+          <div class="proj-fig-frame">
+            <img src="images/capstone/harness-crimping.jpg" alt="Crimping DTM connector pins onto amplifier wiring">
+          </div>
+        </a>
+        <figcaption><span>FIG. 3B</span>Crimping pins for DTM connectors</figcaption>
+      </figure>
+      <figure class="proj-fig">
+        <a href="images/capstone/strain-amplifiers.jpg">
+          <div class="proj-fig-frame">
+            <img src="images/capstone/strain-amplifiers.jpg" alt="Four finished strain gauge amplifiers with connectors">
+          </div>
+        </a>
+        <figcaption><span>FIG. 3C</span>Finished amplifiers, ready for the car</figcaption>
+      </figure>
+    </div>
+
+    <div class="pd-body">
+      <h2>Testing &amp; results</h2>
+      <h3>Tire loads: the strain gauges failed, the backup worked</h3>
+      <p>I validated the loads on the team's corner-weight scales (±1 lb), adding weight to the chassis in steps. The strain gauges tracked for the first few trials, then fell further and further behind the scales. They also stuck: after a load was removed, they kept reading as if it were still there. I checked the wiring and it was correct, so the issue was the bonded gauges themselves.</p>
+      <p>I had logged the damper potentiometers during the same tests. Shock displacement had a clean linear relationship with tire load and was repeatable to about ±2 lb (≈ ±9 N), well inside the ±25 N spec, and it needs no extra hardware. The system also kept working after a session in the rain, which is a practical check of the IP54 requirement.</p>
+    </div>
+
+    <div class="pd-pair">
+      <figure class="proj-fig proj-fig--plot">
+        <div class="proj-fig-frame">
+          <img src="images/capstone/fz-strain-vs-scales.png" alt="Bar chart comparing scale pad force with strain gauge force over 13 trials; strain gauge readings fall well below the scales as load increases">
+        </div>
+        <figcaption><span>FIG. 4A</span>Strain gauge load vs. scale pad force. The gauges stopped tracking as load increased.</figcaption>
+      </figure>
+      <figure class="proj-fig proj-fig--plot">
+        <div class="proj-fig-frame">
+          <img src="images/capstone/shock-displacement-fz.png" alt="Scatter plot of shock displacement against vertical force with a linear fit">
+        </div>
+        <figcaption><span>FIG. 4B</span>Shock displacement vs. vertical load. Linear and repeatable to about ±2 lb.</figcaption>
+      </figure>
+    </div>
+
+    <div class="pd-body">
+      <h3>Tire temperatures</h3>
+      <p>I heated the tire with a heat gun to cover the required range and compared the sensor with a FLIR C5 thermal camera (±3 °C) averaged over the same patch of tread. In all three trials the sensor was within about ±1 °C of the camera. It logs at 16 Hz, so it captures temperature changes during transients.</p>
+    </div>
+
+    <div class="pd-pair">
+      <figure class="proj-fig proj-fig--plot">
+        <div class="proj-fig-frame">
+          <img src="images/capstone/flir-validation.jpg" alt="FLIR thermal camera showing a heated patch on the tire">
+        </div>
+        <figcaption><span>FIG. 5A</span>Reference reading with a FLIR C5</figcaption>
+      </figure>
+      <figure class="proj-fig proj-fig--plot">
+        <div class="proj-fig-frame">
+          <img src="images/capstone/ir-vs-flir.png" alt="Bar chart comparing IR sensor and thermal camera surface temperatures over three trials">
+        </div>
+        <figcaption><span>FIG. 5B</span>IR sensor vs. thermal camera, three trials</figcaption>
+      </figure>
+    </div>
+
+    <div class="pd-body">
+      <h3>Vehicle handling</h3>
+      <p>The handling side is all software: MoTeC i2 math channels for chassis side slip, tire slip angles, understeer coefficient and yaw moment, organised into a workspace for use at the track. The slip calculation was validated in Assetto Corsa to within about ±1° of the true value. The plots and what they showed are on the data analysis page.</p>
+      <p><a href="motorsport-racing-data-analysis.html" class="project-link">See the handling analysis →</a></p>
+
+      <h2>Outcome</h2>
+    </div>
+
+    <ul class="fs-takeaways pd-grid">
+      <li><strong>All specs met</strong>Every requirement across the three objectives passed, with tire loads coming from the damper potentiometers.</li>
+      <li><strong>$294 spent of $5,722 planned</strong>Reusing CAN sensors the team already owned and leftover tire sets cut the cost by about 95%.</li>
+      <li><strong>Test before you commit</strong>The highest-scoring concept failed in validation. Logging the alternatives in the same tests meant the project still delivered.</li>
+      <li><strong>Built to be reused</strong>The workspace, mounts and harness stay on the car, so future members can use them with no setup.</li>
+    </ul>
+
+    <div class="pd-body">
+      <h2>What I'd do next</h2>
+      <p>Replace the strain gauges with screw-in axial load cells. Putting them in the control arms and tie rods as well would give lateral force and aligning moment from the link force vectors, which vertical load alone can't. A dedicated slip angle sensor (accurate to 0.1–0.25°) would allow a proper comparison with the Calspan tire data, and could be bought as shared lab equipment for other teams and capstones. The team also needs to measure the car's yaw moment of inertia, for example on a bifilar or trifilar pendulum, so yaw moment can be calculated from real track data.</p>
+
+    </div>
+
+    <!-- DOCUMENTS — hidden for now. To show: move the h2 and p back inside the pd-body above, and uncomment the buttons.
+      <h2>Documents</h2>
+      <p>The full design report covers the project management, risk register, QFD and trade studies in detail.</p>
+    <div class="hero-actions pd-actions">
+      <a href="files/vehicle-handling-final-design-report.pdf" class="btn btn-primary" target="_blank" rel="noopener">Final design report (PDF) →</a>
+      <a href="files/vehicle-handling-final-design-review.pdf" class="btn-secondary" target="_blank" rel="noopener">Final design review slides →</a>
+    </div>
+    -->
+
+    <p class="pd-note">The tire model this work set out to validate was developed by J. Thibault from FSAE TTC data in 2024–25.</p>
   </section>
 </main>
 
 <footer class="footer">
   <div class="footer-inner">
     <span>KAELAN KHAN — ENG. PORTFOLIO</span>
-    <span>TIRE DATA ANALYSIS</span>
+    <span>VEHICLE HANDLING CHARACTERIZATION</span>
     <span>© 2026</span>
   </div>
 </footer>
+
+<script>
+(function () {
+  // If a photo file doesn't exist yet, show a clean empty box instead of a broken image
+  document.querySelectorAll('.proj-fig-frame img').forEach(function (img) {
+    function markEmpty() { img.closest('.proj-fig-frame').classList.add('is-empty'); }
+    if (img.complete && img.naturalWidth === 0) markEmpty();
+    img.addEventListener('error', markEmpty);
+  });
+
+  // Lightbox: click a photo to view it large, with arrows to move between photos
+  const box = document.createElement('div');
+  box.className = 'lightbox';
+  box.setAttribute('role', 'dialog');
+  box.setAttribute('aria-modal', 'true');
+  box.innerHTML =
+    '<button class="lightbox-close" aria-label="Close">CLOSE ✕</button>' +
+    '<button class="lightbox-arrow lightbox-prev" aria-label="Previous photo">‹</button>' +
+    '<img alt="">' +
+    '<p class="lightbox-caption"></p>' +
+    '<button class="lightbox-arrow lightbox-next" aria-label="Next photo">›</button>';
+  document.body.appendChild(box);
+  const big = box.querySelector('img');
+  const cap = box.querySelector('.lightbox-caption');
+  const prevBtn = box.querySelector('.lightbox-prev');
+  const nextBtn = box.querySelector('.lightbox-next');
+  let photos = [];
+  let current = 0;
+
+  function show(i) {
+    current = (i + photos.length) % photos.length; // wraps around at the ends
+    const link = photos[current];
+    const img = link.querySelector('img');
+    const href = link.getAttribute('href');
+    big.src = (href && href !== '#') ? href : img.src;
+    big.alt = img.alt;
+    const fc = link.closest('.proj-fig').querySelector('figcaption');
+    const count = photos.length > 1
+      ? '<span class="lightbox-count">' + (current + 1) + ' / ' + photos.length + '</span>'
+      : '';
+    cap.innerHTML = count + (fc ? fc.innerHTML : '');
+    prevBtn.hidden = nextBtn.hidden = photos.length < 2;
+  }
+
+  function open(link) {
+    photos = Array.from(document.querySelectorAll('.proj-fig a'))
+      .filter(function (a) { return !a.querySelector('.is-empty'); });
+    show(photos.indexOf(link));
+    box.classList.add('is-open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function close() {
+    box.classList.remove('is-open');
+    document.body.style.overflow = '';
+  }
+
+  document.querySelectorAll('.proj-fig a').forEach(function (link) {
+    link.addEventListener('click', function (e) {
+      e.preventDefault();
+      if (link.querySelector('.is-empty')) return; // nothing to enlarge yet
+      open(link);
+    });
+  });
+
+  prevBtn.addEventListener('click', function (e) { e.stopPropagation(); show(current - 1); });
+  nextBtn.addEventListener('click', function (e) { e.stopPropagation(); show(current + 1); });
+  big.addEventListener('click', function (e) { e.stopPropagation(); });
+  box.addEventListener('click', close); // clicking the dark background or CLOSE closes it
+
+  document.addEventListener('keydown', function (e) {
+    if (!box.classList.contains('is-open')) return;
+    if (e.key === 'Escape') close();
+    if (e.key === 'ArrowLeft') show(current - 1);
+    if (e.key === 'ArrowRight') show(current + 1);
+  });
+
+  // Swipe left/right on phones
+  let startX = null;
+  box.addEventListener('touchstart', function (e) { startX = e.touches[0].clientX; }, { passive: true });
+  box.addEventListener('touchend', function (e) {
+    if (startX === null) return;
+    const dx = e.changedTouches[0].clientX - startX;
+    if (Math.abs(dx) > 50 && photos.length > 1) show(current + (dx < 0 ? 1 : -1));
+    startX = null;
+  });
+})();
+</script>
 
 </body>
 </html>
